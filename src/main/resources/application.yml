@@ -1,0 +1,40 @@
+spring:
+  batch:
+    initialize-schema: always
+    job:
+      enabled: false
+  jpa:
+    hibernate:
+      show-sql: true
+      ddl-auto: none
+    open-in-view: false
+    database-platform: org.hibernate.dialect.Oracle12cDialect
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:oracle:thin:@localhost:1521:xe
+    username: ${DB_USER}
+    password: ${DB_PWD}
+    driver-class-name: oracle.jdbc.OracleDriver
+    hikari:
+      poolName: HikariKnoorPool
+      autoCommit: false
+      connectionTimeout: 30000
+      idleTimeout: 600000
+      maxLifetime: 1800000
+      maximumPoolSize: 5
+      validationQuery: SELECT 1
+  main:
+    allow-bean-definition-overriding: true
+    lazy-initialization: false
+#    web-environment: false
+
+app:
+  resource:
+    input: ${JSON_INPUT_FILE}
+
+server:
+  port: 9006
